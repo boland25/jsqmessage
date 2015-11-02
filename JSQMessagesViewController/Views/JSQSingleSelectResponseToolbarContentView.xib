@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="zLj-cx-TfS" customClass="JSQSingleSelectResponseToolbarContentView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKz-Xt-hX0" userLabel="Left button container">
+                    <rect key="frame" x="8" y="6" width="34" height="32"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BG-4a-oKn">
+                            <rect key="frame" x="0.0" y="1" width="46" height="30"/>
+                            <animations/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="34" id="583-Iv-w4h"/>
+                        <constraint firstAttribute="height" constant="32" id="sYo-Um-XWJ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pet-Iv-6bT" userLabel="Right button container">
+                    <rect key="frame" x="262" y="6" width="50" height="32"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="8Cd-sW-I55"/>
+                        <constraint firstAttribute="width" constant="50" id="gC0-H7-5XY"/>
+                    </constraints>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uPX-cU-Gvx" customClass="JSQMessagesComposerTextView">
+                    <rect key="frame" x="50" y="7" width="204" height="30"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhK-e0-tFC">
+                    <rect key="frame" x="200" y="7" width="46" height="30"/>
+                    <animations/>
+                    <state key="normal" title="Button"/>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="uPX-cU-Gvx" firstAttribute="top" secondItem="zLj-cx-TfS" secondAttribute="top" constant="7" id="6gh-G7-hmT"/>
+                <constraint firstItem="cKz-Xt-hX0" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" constant="8" id="Mwx-xx-8nF"/>
+                <constraint firstItem="uPX-cU-Gvx" firstAttribute="leading" secondItem="cKz-Xt-hX0" secondAttribute="trailing" constant="8" id="PV2-8e-gdb"/>
+                <constraint firstItem="pet-Iv-6bT" firstAttribute="leading" secondItem="uPX-cU-Gvx" secondAttribute="trailing" constant="8" id="bex-KR-H8F"/>
+                <constraint firstAttribute="trailing" secondItem="pet-Iv-6bT" secondAttribute="trailing" constant="8" id="dwa-nD-3je"/>
+                <constraint firstAttribute="bottom" secondItem="cKz-Xt-hX0" secondAttribute="bottom" constant="6" id="fyx-Sg-UYz"/>
+                <constraint firstAttribute="bottom" secondItem="pet-Iv-6bT" secondAttribute="bottom" constant="6" id="mrA-zZ-sge"/>
+                <constraint firstAttribute="bottom" secondItem="uPX-cU-Gvx" secondAttribute="bottom" constant="7" id="o0j-PH-uVp"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="268" y="548"/>
+        </view>
+    </objects>
+</document>

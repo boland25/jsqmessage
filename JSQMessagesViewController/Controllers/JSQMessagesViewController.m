@@ -32,6 +32,7 @@
 
 #import "JSQMessagesToolbarContentView.h"
 #import "JSQMessagesInputToolbar.h"
+#import "JSQResponseButtonToolbar.h"
 #import "JSQMessagesComposerTextView.h"
 
 #import "JSQMessagesTimestampFormatter.h"
@@ -127,11 +128,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-
+    
     self.inputToolbar.delegate = self;
-    self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
-    self.inputToolbar.contentView.textView.delegate = self;
-
+    
+    if (self.inputToolbar.inputToolbarType == Standard) {
+        self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
+        self.inputToolbar.contentView.textView.delegate = self;
+    }
+    
     self.automaticallyScrollsToMostRecentMessage = YES;
 
     self.outgoingCellIdentifier = [JSQMessagesCollectionViewCellOutgoing cellReuseIdentifier];
@@ -152,11 +156,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self jsq_updateCollectionViewInsets];
 
     // Don't set keyboardController if client creates custom content view via -loadToolbarContentView
-    if (self.inputToolbar.contentView.textView != nil) {
-        self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
-                                                                              contextView:self.view
-                                                                     panGestureRecognizer:self.collectionView.panGestureRecognizer
-                                                                                 delegate:self];
+    if (self.inputToolbar.inputToolbarType == Standard) {
+        if (self.inputToolbar.contentView.textView != nil) {
+            self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
+                                                                                  contextView:self.view
+                                                                         panGestureRecognizer:self.collectionView.panGestureRecognizer
+                                                                                     delegate:self];
+            
+        }
+
     }
 }
 
@@ -169,7 +177,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _collectionView.delegate = nil;
     _collectionView = nil;
 
-    _inputToolbar.contentView.textView.delegate = nil;
+    if (_inputToolbar.inputToolbarType == Standard) {
+        _inputToolbar.contentView.textView.delegate = nil;
+    }
     _inputToolbar.delegate = nil;
     _inputToolbar = nil;
 
@@ -224,8 +234,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     [[[self class] nib] instantiateWithOwner:self options:nil];
 
+  //  [self setToolbarByType:SingleSelect];
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -333,13 +345,13 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)finishSendingMessageAnimated:(BOOL)animated {
 
-    UITextView *textView = self.inputToolbar.contentView.textView;
-    textView.text = nil;
-    [textView.undoManager removeAllActions];
-
-    [self.inputToolbar toggleSendButtonEnabled];
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
+    if (_inputToolbar.inputToolbarType == Standard) {
+        UITextView *textView = self.inputToolbar.contentView.textView;
+        textView.text = nil;
+        [textView.undoManager removeAllActions];
+        [self.inputToolbar toggleSendButtonEnabled];
+        [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
+    }
 
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
@@ -404,6 +416,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.collectionView scrollToItemAtIndexPath:finalIndexPath
                                 atScrollPosition:scrollPosition
                                         animated:animated];
+}
+
+- (void)setToolbarByType:(JSQInputToolbarType)toolBarType {
+    //TODO: figure out what type is required and see if i can overwrite what is currently there
+    [self jsq_removeObservers];
+    [self.inputToolbar setToolbarContentViewByType:toolBarType];
 }
 
 #pragma mark - JSQMessages collection view data source
@@ -986,12 +1004,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         return;
     }
 
-    [self.inputToolbar.contentView.textView addObserver:self
-                                             forKeyPath:NSStringFromSelector(@selector(contentSize))
-                                                options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-                                                context:kJSQMessagesKeyValueObservingContext];
+    if (self.inputToolbar.inputToolbarType == Standard) {
+        [self.inputToolbar.contentView.textView addObserver:self
+                                                 forKeyPath:NSStringFromSelector(@selector(contentSize))
+                                                    options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                                                    context:kJSQMessagesKeyValueObservingContext];
+        
+        self.jsq_isObserving = YES;
 
-    self.jsq_isObserving = YES;
+    }
 }
 
 - (void)jsq_removeObservers
@@ -999,14 +1020,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (!_jsq_isObserving) {
         return;
     }
-
-    @try {
-        [_inputToolbar.contentView.textView removeObserver:self
-                                                forKeyPath:NSStringFromSelector(@selector(contentSize))
-                                                   context:kJSQMessagesKeyValueObservingContext];
+    if (self.inputToolbar.inputToolbarType == Standard) {
+        @try {
+            [_inputToolbar.contentView.textView removeObserver:self
+                                                    forKeyPath:NSStringFromSelector(@selector(contentSize))
+                                                       context:kJSQMessagesKeyValueObservingContext];
+        }
+        @catch (NSException * __unused exception) { }
     }
-    @catch (NSException * __unused exception) { }
-
     _jsq_isObserving = NO;
 }
 

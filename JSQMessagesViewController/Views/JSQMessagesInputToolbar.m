@@ -19,6 +19,8 @@
 #import "JSQMessagesInputToolbar.h"
 
 #import "JSQMessagesComposerTextView.h"
+#import "JSQSingleSelectResponseToolbarContentView.h"
+#import "TestInputView.h"
 
 #import "JSQMessagesToolbarButtonFactory.h"
 
@@ -57,30 +59,80 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.jsq_isObserving = NO;
     self.sendButtonOnRight = YES;
 
-    self.preferredDefaultHeight = 44.0f;
+    
+    //NOTE: this is where it need to manipulate what foes in the toolbar and the size that we create for it
+    self.preferredDefaultHeight = 150.0;
     self.maximumHeight = NSNotFound;
 
-    JSQMessagesToolbarContentView *toolbarContentView = [self loadToolbarContentView];
-    toolbarContentView.frame = self.frame;
+    [self setToolbarContentViewByType:BinaryButton];
+    
+    if (self.inputToolbarType == Standard) {
+        [self jsq_addObservers];
+    }
+
+    NSLog(@"do we have a type defined yet %i", self.inputToolbarType);
+    switch (self.inputToolbarType) {
+        case Standard:
+            self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
+            self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
+            [self toggleSendButtonEnabled];
+            break;
+            
+        default:
+            break;
+    }
+    
+   }
+
+- (JSQMessagesToolbarContentView *)loadToolbarContentView:(JSQInputToolbarType)toolbarType
+{
+    NSArray *nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQMessagesToolbarContentView class])
+                                                                                          owner:nil
+                                                                                        options:nil];
+    
+    if (toolbarType != self.inputToolbarType) {
+        JSQMessagesInputToolbar *newToolbar;
+        switch (toolbarType) {
+            case Standard:
+                NSLog(@"setup standard toolbar");
+                break;
+            case BinaryButton:
+                NSLog(@"Binary buton");
+                [self jsq_removeObservers];
+                nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQBinaryResponseToolbarContentView class]) owner:nil options:nil];
+                break;
+            case SingleSelect:
+                NSLog(@"SINGLE Select");
+                
+                [self jsq_removeObservers];
+                nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQSingleSelectResponseToolbarContentView class]) owner:nil options:nil];
+                break;
+            case MultiSelect:
+                NSLog(@"Multi Select");
+            case Picker:
+                NSLog(@"Picker");
+            default:
+                //TODO: set up standard here
+                break;
+        }
+    }
+    self.inputToolbarType = toolbarType;
+    NSLog(@"should change toolbar now %i", self.inputToolbarType);
+    
+    
+    return nibViews.firstObject;
+}
+
+- (void)setToolbarContentViewByType:(JSQInputToolbarType)toolbarType {
+    
+    JSQMessagesToolbarContentView *toolbarContentView = [self loadToolbarContentView:toolbarType];
+    toolbarContentView.frame = self.contentView.frame;
+    [self.contentView removeFromSuperview];
     [self addSubview:toolbarContentView];
     [self jsq_pinAllEdgesOfSubview:toolbarContentView];
     [self setNeedsUpdateConstraints];
     _contentView = toolbarContentView;
 
-    [self jsq_addObservers];
-
-    self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
-    self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
-
-    [self toggleSendButtonEnabled];
-}
-
-- (JSQMessagesToolbarContentView *)loadToolbarContentView
-{
-    NSArray *nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQMessagesToolbarContentView class])
-                                                                                          owner:nil
-                                                                                        options:nil];
-    return nibViews.firstObject;
 }
 
 - (void)dealloc

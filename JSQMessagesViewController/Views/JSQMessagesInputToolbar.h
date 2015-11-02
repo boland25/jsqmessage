@@ -20,9 +20,17 @@
 #import <UIKit/UIKit.h>
 
 #import "JSQMessagesToolbarContentView.h"
+#import "JSQBinaryResponseToolbarContentView.h"
 
 @class JSQMessagesInputToolbar;
 
+typedef NS_ENUM(NSInteger, JSQInputToolbarType) {
+    Standard,
+    BinaryButton,
+    SingleSelect,
+    MultiSelect,
+    Picker
+};
 
 /**
  *  The `JSQMessagesInputToolbarDelegate` protocol defines methods for interacting with
@@ -70,6 +78,11 @@
 @property (weak, nonatomic, readonly) JSQMessagesToolbarContentView *contentView;
 
 /**
+ * Returns what type of toolbar is currently being displayed in the toolbar see JSQInputToolbarType enum for values
+ */
+@property (assign, nonatomic) JSQInputToolbarType inputToolbarType;
+
+/**
  *  A boolean value indicating whether the send button is on the right side of the toolbar or not.
  *
  *  @discussion The default value is `YES`, which indicates that the send button is the right-most subview of
@@ -105,6 +118,17 @@
  *
  *  @return An initialized `JSQMessagesToolbarContentView` if successful, otherwise `nil`.
  */
-- (JSQMessagesToolbarContentView *)loadToolbarContentView;
+- (JSQMessagesToolbarContentView *)loadToolbarContentView:(JSQInputToolbarType)toolbarType;
+
+/**
+ *
+ * Method for loading the different toolbar types
+ * 
+ * @discussion this method calls loadToolbarContentView, then switches out the view for the new view that was called
+ *             Also, adjusts heights and constraints
+ *
+ */
+- (void)setToolbarContentViewByType:(JSQInputToolbarType)toolbarType;
 
 @end
+

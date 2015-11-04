@@ -61,10 +61,10 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 
     
     //NOTE: this is where it need to manipulate what foes in the toolbar and the size that we create for it
-    self.preferredDefaultHeight = 150.0;
+    self.preferredDefaultHeight = 44.0;
     self.maximumHeight = NSNotFound;
 
-    [self setToolbarContentViewByType:BinaryButton];
+    [self setToolbarContentViewByType:Standard];
     
     if (self.inputToolbarType == Standard) {
         [self jsq_addObservers];

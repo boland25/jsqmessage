@@ -73,4 +73,10 @@
  */
 - (JSQMessagesBubbleImage *)incomingMessagesBubbleImageWithColor:(UIColor *)color;
 
+/**
+ *
+ *
+ */
+
+
 @end

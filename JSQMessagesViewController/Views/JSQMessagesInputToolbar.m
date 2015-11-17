@@ -20,6 +20,7 @@
 
 #import "JSQMessagesComposerTextView.h"
 #import "JSQSingleSelectResponseToolbarContentView.h"
+#import "JSQMultiSelectResponseToolbarContentView.h"
 #import "TestInputView.h"
 
 #import "JSQMessagesToolbarButtonFactory.h"
@@ -105,10 +106,14 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                 NSLog(@"SINGLE Select");
                 
                 [self jsq_removeObservers];
+                // NOTE: this will be a picker view
                 nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQSingleSelectResponseToolbarContentView class]) owner:nil options:nil];
                 break;
             case MultiSelect:
+                //NOTE: this one is the multiple choice
                 NSLog(@"Multi Select");
+                nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQMultiSelectResponseToolbarContentView class]) owner:nil options:nil];
+                [self jsq_removeObservers];
             case Picker:
                 NSLog(@"Picker");
             default:

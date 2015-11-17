@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface JSQSingleSelectResponseToolbarContentView : UIView
+
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+
+
 
 @end

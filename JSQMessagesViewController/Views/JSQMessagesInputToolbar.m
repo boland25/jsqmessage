@@ -108,6 +108,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                 [self jsq_removeObservers];
                 // NOTE: this will be a picker view
                 nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQSingleSelectResponseToolbarContentView class]) owner:nil options:nil];
+                self.preferredDefaultHeight = 150.0;
                 break;
             case MultiSelect:
                 //NOTE: this one is the multiple choice

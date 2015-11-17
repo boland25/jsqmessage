@@ -21,16 +21,16 @@
 
 #import "JSQMessagesToolbarContentView.h"
 #import "JSQBinaryResponseToolbarContentView.h"
+#import "JSQToolbarData.h"
 
 @class JSQMessagesInputToolbar;
 
-typedef NS_ENUM(NSInteger, JSQInputToolbarType) {
-    Standard,
-    BinaryButton,
-    SingleSelect,
-    MultiSelect,
-    Picker
-};
+@protocol JSQToolbarSetup
+    
+- (void)configureToolbar:(JSQToolbarData *)toolbarData;
+
+@end
+
 
 /**
  *  The `JSQMessagesInputToolbarDelegate` protocol defines methods for interacting with

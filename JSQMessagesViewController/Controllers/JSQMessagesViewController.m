@@ -124,6 +124,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     self.jsq_isObserving = NO;
 
+    //TODO: this constant needs to be updated when the toolbar is updated
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
 
     self.collectionView.dataSource = self;
@@ -421,7 +422,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)setToolbarByType:(JSQInputToolbarType)toolBarType {
     //TODO: figure out what type is required and see if i can overwrite what is currently there
     [self jsq_removeObservers];
+    //TODO: this constant needs to be updated when the toolbar is updated
+    //This i thikn will need to be a constraint on something, although not sure what
     [self.inputToolbar setToolbarContentViewByType:toolBarType];
+     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
 }
 
 #pragma mark - JSQMessages collection view data source

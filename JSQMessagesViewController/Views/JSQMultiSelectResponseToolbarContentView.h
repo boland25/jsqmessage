@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSQMessagesInputToolbar.h"
 
-@interface JSQMultiSelectResponseToolbarContentView : UIView
+@interface JSQMultiSelectResponseToolbarContentView : UIView <JSQToolbarSetup>
 
 @end

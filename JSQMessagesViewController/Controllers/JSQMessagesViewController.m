@@ -419,15 +419,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                         animated:animated];
 }
 
-- (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData {
-    //TODO: figure out what type is required and see if i can overwrite what is currently there
-    [self jsq_removeObservers];
-    //TODO: this constant needs to be updated when the toolbar is updated
-    //This i thikn will need to be a constraint on something, although not sure what
-    [self.inputToolbar setToolbarContentViewByType:toolBarType withContent:toolBarData];
-     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
-}
-
 #pragma mark - JSQMessages collection view data source
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -998,6 +989,18 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //  check if cell copy menu is showing
     //  it is only our menu if `selectedIndexPathForMenu` is not `nil`
     return self.selectedIndexPathForMenu != nil && [[UIMenuController sharedMenuController] isMenuVisible];
+}
+
+#pragma mark - Custom Input Toolbar
+
+- (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData {
+    //TODO: removing observers but will need to put them back on at some point too no?
+    [self jsq_removeObservers];
+    [self.keyboardController endListeningForKeyboard];
+    //TODO: this constant needs to be updated when the toolbar is updated
+    //This i think will need to be a constraint on something, although not sure what
+    [self.inputToolbar setToolbarContentViewByType:toolBarType withContent:toolBarData];
+    self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
 }
 
 #pragma mark - Utilities

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (nonatomic, strong) JSQToolbarData *toolbarData;
 
 
 

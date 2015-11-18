@@ -419,12 +419,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                         animated:animated];
 }
 
-- (void)setToolbarByType:(JSQInputToolbarType)toolBarType {
+- (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData {
     //TODO: figure out what type is required and see if i can overwrite what is currently there
     [self jsq_removeObservers];
     //TODO: this constant needs to be updated when the toolbar is updated
     //This i thikn will need to be a constraint on something, although not sure what
-    [self.inputToolbar setToolbarContentViewByType:toolBarType];
+    [self.inputToolbar setToolbarContentViewByType:toolBarType withContent:toolBarData];
      self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
 }
 

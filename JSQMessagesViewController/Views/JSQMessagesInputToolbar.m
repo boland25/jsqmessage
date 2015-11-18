@@ -65,7 +65,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.preferredDefaultHeight = 44.0;
     self.maximumHeight = NSNotFound;
 
-    [self setToolbarContentViewByType:Standard];
+    [self setToolbarContentViewByType:Standard withContent:nil];
     
     if (self.inputToolbarType == Standard) {
         [self jsq_addObservers];
@@ -108,7 +108,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                 [self jsq_removeObservers];
                 // NOTE: this will be a picker view
                 nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQSingleSelectResponseToolbarContentView class]) owner:nil options:nil];
-                self.preferredDefaultHeight = 150.0;
+                self.preferredDefaultHeight = 258.0;
                 break;
             case MultiSelect:
                 //NOTE: this one is the multiple choice
@@ -129,11 +129,15 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     return nibViews.firstObject;
 }
 
-- (void)setToolbarContentViewByType:(JSQInputToolbarType)toolbarType {
+- (void)setToolbarContentViewByType:(JSQInputToolbarType)toolbarType withContent:(JSQToolbarData *)toolbarData {
     
     JSQMessagesToolbarContentView *toolbarContentView = [self loadToolbarContentView:toolbarType];
     toolbarContentView.frame = self.contentView.frame;
     [self.contentView removeFromSuperview];
+    if (self.inputToolbarType != Standard) {
+        // TODO: load the toolbardata
+        [(<JSQToolbarSetup>)toolbarContentView setupToolbarWithData:toolbarData];
+    }
     [self addSubview:toolbarContentView];
     [self jsq_pinAllEdgesOfSubview:toolbarContentView];
     [self setNeedsUpdateConstraints];

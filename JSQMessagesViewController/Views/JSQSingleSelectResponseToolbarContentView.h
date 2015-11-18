@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSQMessagesInputToolbar.h"
 
 
-@interface JSQSingleSelectResponseToolbarContentView : UIView
+@interface JSQSingleSelectResponseToolbarContentView : UIView <JSQToolbarSetup>
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;

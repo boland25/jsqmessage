@@ -27,7 +27,7 @@
 
 @protocol JSQToolbarSetup
     
-- (void)configureToolbar:(JSQToolbarData *)toolbarData;
+- (void)setupToolbarWithData:(JSQToolbarData *)toolbarData;
 
 @end
 
@@ -128,7 +128,7 @@
  *             Also, adjusts heights and constraints
  *
  */
-- (void)setToolbarContentViewByType:(JSQInputToolbarType)toolbarType;
+- (void)setToolbarContentViewByType:(JSQInputToolbarType)toolbarType withContent:(JSQToolbarData *)toolbarData;
 
 @end
 

@@ -27,5 +27,11 @@
     self.backgroundColor = [UIColor clearColor];
 }
 
+#pragma mark JSQToolbarSetup Protocol
+
+- (void)setupToolbarWithData:(JSQToolbarData *)toolbarData {
+    // TODO: for single select, this would carry in it, a UICOlor for the button, and a dictionary of picker information, also the prompt of what the answer should be
+}
+
 
 @end

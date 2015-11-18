@@ -11,26 +11,63 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oL9-Wz-aGd">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oL9-Wz-aGd">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhK-e0-tFC">
+                            <rect key="frame" x="245" y="0.0" width="67" height="44"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="beP-f2-Iia"/>
+                                <constraint firstAttribute="width" constant="67" id="vvK-Bb-SDv"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="Send"/>
+                        </button>
+                    </subviews>
                     <animations/>
-                    <color key="backgroundColor" red="0.76078431372549016" green="0.76078431372549016" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="KhK-e0-tFC" firstAttribute="top" secondItem="oL9-Wz-aGd" secondAttribute="top" id="zAY-oy-hLA"/>
+                        <constraint firstAttribute="trailing" secondItem="KhK-e0-tFC" secondAttribute="trailing" constant="8" id="zcG-KU-lxf"/>
+                    </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhK-e0-tFC">
-                    <rect key="frame" x="265" y="8" width="36" height="30"/>
-                    <animations/>
-                    <state key="normal" title="Send"/>
-                </button>
-                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q7h-RV-zeN">
-                    <rect key="frame" x="0.0" y="46" width="320" height="209"/>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7h-RV-zeN">
+                    <rect key="frame" x="0.0" y="46" width="320" height="208"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </pickerView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Q7h-RV-zeN" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" id="2ps-Sb-bDM"/>
+                <constraint firstAttribute="bottom" secondItem="Q7h-RV-zeN" secondAttribute="bottom" id="LS3-qJ-8bn"/>
+                <constraint firstAttribute="trailing" secondItem="Q7h-RV-zeN" secondAttribute="trailing" id="Soh-cT-I7C"/>
+                <constraint firstAttribute="bottom" secondItem="oL9-Wz-aGd" secondAttribute="bottom" id="W8N-i2-8Jz"/>
+                <constraint firstAttribute="trailing" secondItem="Q7h-RV-zeN" secondAttribute="trailing" id="bkP-KD-qMA"/>
+                <constraint firstItem="Q7h-RV-zeN" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" id="bp5-VN-Yhe"/>
+                <constraint firstAttribute="trailing" secondItem="oL9-Wz-aGd" secondAttribute="trailing" id="dTs-V3-EML"/>
+                <constraint firstAttribute="trailing" secondItem="Q7h-RV-zeN" secondAttribute="trailing" id="eoD-FR-bhm"/>
+                <constraint firstItem="oL9-Wz-aGd" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" id="gF4-9F-M4z"/>
+                <constraint firstAttribute="bottom" secondItem="Q7h-RV-zeN" secondAttribute="bottom" id="nMY-DA-xkU"/>
+                <constraint firstItem="Q7h-RV-zeN" firstAttribute="top" secondItem="zLj-cx-TfS" secondAttribute="top" constant="46" id="qiz-gB-wsw"/>
+                <constraint firstItem="Q7h-RV-zeN" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" id="xRp-sK-GCL"/>
+                <constraint firstAttribute="bottom" secondItem="Q7h-RV-zeN" secondAttribute="bottom" id="yG4-Ye-Tpn"/>
+                <constraint firstItem="oL9-Wz-aGd" firstAttribute="top" secondItem="zLj-cx-TfS" secondAttribute="top" id="zo9-06-0zm"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="2ps-Sb-bDM"/>
+                    <exclude reference="LS3-qJ-8bn"/>
+                    <exclude reference="bkP-KD-qMA"/>
+                    <exclude reference="eoD-FR-bhm"/>
+                    <exclude reference="nMY-DA-xkU"/>
+                    <exclude reference="xRp-sK-GCL"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="bgView" destination="oL9-Wz-aGd" id="Nb6-SM-j0D"/>
                 <outlet property="pickerView" destination="Q7h-RV-zeN" id="3Lr-GR-vM3"/>

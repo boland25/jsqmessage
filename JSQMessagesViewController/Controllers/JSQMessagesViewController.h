@@ -272,6 +272,6 @@
  * Changes the type of input toolbar that is shown to the user
  * @param toolBarType is an enum that is sent to change between binary, singleselect, multi-select, and standard
  */
-- (void)setToolbarByType:(JSQInputToolbarType)toolBarType;
+- (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData;
 
 @end

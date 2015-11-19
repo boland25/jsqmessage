@@ -36,6 +36,12 @@
     self.pickerView.dataSource = self.toolbarData;
     self.pickerView.delegate = self.toolbarData;
     [self.pickerView reloadAllComponents];
+    if (self.toolbarData.buttonColor != nil) {
+        self.sendButton.tintColor = self.toolbarData.buttonColor;
+    }
+    if (self.toolbarData.answerPrefix != nil) {
+        self.answerPrefixLabel.text = self.toolbarData.answerPrefix;
+    }
 }
 
 

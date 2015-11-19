@@ -21,9 +21,16 @@
                                 <constraint firstAttribute="height" constant="44" id="beP-f2-Iia"/>
                                 <constraint firstAttribute="width" constant="67" id="vvK-Bb-SDv"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                             <state key="normal" title="Send"/>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I've Been feeling:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhG-g3-jms">
+                            <rect key="frame" x="13" y="11" width="153" height="21"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
@@ -69,6 +76,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="answerPrefixLabel" destination="GhG-g3-jms" id="Rrc-Kb-RmH"/>
                 <outlet property="bgView" destination="oL9-Wz-aGd" id="Nb6-SM-j0D"/>
                 <outlet property="pickerView" destination="Q7h-RV-zeN" id="3Lr-GR-vM3"/>
                 <outlet property="sendButton" destination="KhK-e0-tFC" id="dy0-Bh-Cww"/>

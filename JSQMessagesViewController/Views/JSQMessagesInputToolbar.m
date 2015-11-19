@@ -66,36 +66,25 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.maximumHeight = NSNotFound;
 
     [self setToolbarContentViewByType:Standard withContent:nil];
-    
-    if (self.inputToolbarType == Standard) {
-        [self jsq_addObservers];
-    }
-
     NSLog(@"do we have a type defined yet %i", self.inputToolbarType);
-    switch (self.inputToolbarType) {
-        case Standard:
-            self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
-            self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
-            [self toggleSendButtonEnabled];
-            break;
-            
-        default:
-            break;
-    }
     
-   }
+}
 
+/**
+    NOTE: this happens before the old contentView is off the screen is we're loading a new one after there is an old one.  so don't reference self.contentView in here hoping to get access to the new toolbar contentview
+ */
 - (JSQMessagesToolbarContentView *)loadToolbarContentView:(JSQInputToolbarType)toolbarType
 {
     NSArray *nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQMessagesToolbarContentView class])
                                                                                           owner:nil
                                                                                         options:nil];
-    
+
     if (toolbarType != self.inputToolbarType) {
         JSQMessagesInputToolbar *newToolbar;
         switch (toolbarType) {
             case Standard:
                 NSLog(@"setup standard toolbar");
+                 self.preferredDefaultHeight = 44.0;
                 break;
             case BinaryButton:
                 NSLog(@"Binary buton");
@@ -125,7 +114,6 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     self.inputToolbarType = toolbarType;
     NSLog(@"should change toolbar now %i", self.inputToolbarType);
     
-    
     return nibViews.firstObject;
 }
 
@@ -142,6 +130,13 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     [self jsq_pinAllEdgesOfSubview:toolbarContentView];
     [self setNeedsUpdateConstraints];
     _contentView = toolbarContentView;
+    if (self.inputToolbarType == Standard) {
+        [self jsq_addObservers];
+        self.contentView.leftBarButtonItem = [JSQMessagesToolbarButtonFactory defaultAccessoryButtonItem];
+        self.contentView.rightBarButtonItem = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
+        [self toggleSendButtonEnabled];
+
+    }
 
 }
 

@@ -235,7 +235,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     [[[self class] nib] instantiateWithOwner:self options:nil];
 
-  //  [self setToolbarByType:SingleSelect];
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
     
@@ -996,7 +995,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData {
     //TODO: removing observers but will need to put them back on at some point too no?
     [self jsq_removeObservers];
-    [self.keyboardController endListeningForKeyboard];
+    if (toolBarType != Standard) {
+        [self.keyboardController endListeningForKeyboard];
+    } else {
+        [self.keyboardController beginListeningForKeyboard];
+    }
+    
     //TODO: this constant needs to be updated when the toolbar is updated
     //This i think will need to be a constraint on something, although not sure what
     [self.inputToolbar setToolbarContentViewByType:toolBarType withContent:toolBarData];

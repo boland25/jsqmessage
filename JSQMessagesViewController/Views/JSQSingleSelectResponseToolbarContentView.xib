@@ -23,6 +23,9 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                             <state key="normal" title="Send"/>
+                            <connections>
+                                <action selector="sendButtonWasTapped:" destination="zLj-cx-TfS" eventType="touchUpInside" id="bHX-hC-aKX"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I've Been feeling:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhG-g3-jms">
                             <rect key="frame" x="13" y="11" width="153" height="21"/>

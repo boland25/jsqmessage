@@ -42,7 +42,18 @@
     if (self.toolbarData.answerPrefix != nil) {
         self.answerPrefixLabel.text = self.toolbarData.answerPrefix;
     }
+    
+    self.delegate = toolbarData.toolbarDelegate;
 }
 
+//TODO : dont' let the Send button be active until something is chosen, although it would default to being chosen
 
+
+- (IBAction)sendButtonWasTapped:(id)sender {
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(customToolbarSendButtonWasPressed:)]) {
+            [self.delegate customToolbarSendButtonWasPressed:@"TEST THIS THIS WORKS"];
+        }
+    }
+}
 @end

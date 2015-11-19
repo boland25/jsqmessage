@@ -18,6 +18,9 @@
 @property (nonatomic, strong) JSQToolbarData *toolbarData;
 @property (weak, nonatomic) IBOutlet UILabel *answerPrefixLabel;
 
+@property (nonatomic, weak) id<JSQMessagesCustomToolbarDelegate> delegate;
 
+
+- (IBAction)sendButtonWasTapped:(id)sender;
 
 @end

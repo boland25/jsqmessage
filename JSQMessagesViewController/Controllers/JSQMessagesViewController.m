@@ -993,18 +993,26 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 #pragma mark - Custom Input Toolbar
 
 - (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData {
-    //TODO: removing observers but will need to put them back on at some point too no?
-    [self jsq_removeObservers];
+
+    //NOTE: this needs to be done before remove the current contentView off screen
     if (toolBarType != Standard) {
+        [self jsq_removeObservers];
         [self.keyboardController endListeningForKeyboard];
-    } else {
-        [self.keyboardController beginListeningForKeyboard];
     }
-    
     //TODO: this constant needs to be updated when the toolbar is updated
     //This i think will need to be a constraint on something, although not sure what
     [self.inputToolbar setToolbarContentViewByType:toolBarType withContent:toolBarData];
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
+    //NOTE: this needs to be done AFTER the new contentView goes on screen and happens to be the standard keyboard
+    if (toolBarType == Standard) {
+        [self jsq_addObservers];
+        [self.keyboardController beginListeningForKeyboard];
+        //NOTE: if we're re-setting to normal keyboard, we have to re-apply all of thisll
+        self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
+        self.inputToolbar.contentView.textView.delegate = self;
+
+    }
+    
 }
 
 #pragma mark - Utilities

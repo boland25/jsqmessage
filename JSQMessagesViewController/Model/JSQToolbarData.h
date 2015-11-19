@@ -19,11 +19,22 @@ typedef NS_ENUM(NSInteger, JSQInputToolbarType) {
     Picker
 };
 
+@protocol JSQMessagesCustomToolbarDelegate <UIToolbarDelegate>
+
+
+/**
+ * TODO: make a custom object that properly gives back an object of response data
+ */
+- (void)customToolbarSendButtonWasPressed:(NSString *)stringChosen;
+
+@end
+
 @interface JSQToolbarData : NSObject
 
 @property (nonatomic, assign) JSQInputToolbarType toolbarType;
 @property (nonatomic, strong) NSArray *choices;
 @property (nonatomic, copy) UIColor *buttonColor;
+@property (nonatomic, weak) id<JSQMessagesCustomToolbarDelegate> toolbarDelegate;
 
 /**
  - Answer Prefix is for some questions that it helps start answering the question for the user

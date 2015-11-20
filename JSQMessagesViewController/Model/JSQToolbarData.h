@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, JSQInputToolbarType) {
 /**
  * TODO: make a custom object that properly gives back an object of response data
  */
-- (void)customToolbarSendButtonWasPressed:(NSString *)stringChosen;
+- (void)customToolbarSendButtonWasPressed:(NSArray *)selectedChoices;
 
 @end
 
@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, JSQInputToolbarType) {
 @property (nonatomic, strong) NSArray *choices;
 @property (nonatomic, copy) UIColor *buttonColor;
 @property (nonatomic, weak) id<JSQMessagesCustomToolbarDelegate> toolbarDelegate;
+@property (nonatomic, assign) BOOL isMultiSelect;
 
 /**
  - Answer Prefix is for some questions that it helps start answering the question for the user
@@ -44,5 +45,7 @@ typedef NS_ENUM(NSInteger, JSQInputToolbarType) {
 
 
 - (instancetype)initWithData:(JSQInputToolbarType)toolbarType choices:(NSArray *)choicesArray buttonColor:(UIColor *)buttonColor;
+
+- (NSArray *)selectedChoices;
 
 @end

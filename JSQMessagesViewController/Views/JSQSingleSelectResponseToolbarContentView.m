@@ -52,7 +52,7 @@
 - (IBAction)sendButtonWasTapped:(id)sender {
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(customToolbarSendButtonWasPressed:)]) {
-            [self.delegate customToolbarSendButtonWasPressed:@"TEST THIS THIS WORKS"];
+            [self.delegate customToolbarSendButtonWasPressed:self.toolbarData.selectedChoices];
         }
     }
 }

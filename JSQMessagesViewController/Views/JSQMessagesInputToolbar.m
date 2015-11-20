@@ -79,7 +79,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                                                                                           owner:nil
                                                                                         options:nil];
 
-    if (toolbarType != self.inputToolbarType) {
+ //   if (toolbarType != self.inputToolbarType) {
         JSQMessagesInputToolbar *newToolbar;
         switch (toolbarType) {
             case Standard:
@@ -110,7 +110,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                 //TODO: set up standard here
                 break;
         }
-    }
+  //  }
     self.inputToolbarType = toolbarType;
     //NSLog(@"should change toolbar now %i", self.inputToolbarType);
     

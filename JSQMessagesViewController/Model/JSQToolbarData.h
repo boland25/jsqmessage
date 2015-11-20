@@ -34,6 +34,8 @@ typedef NS_ENUM(NSInteger, JSQInputToolbarType) {
 @property (nonatomic, assign) JSQInputToolbarType toolbarType;
 @property (nonatomic, strong) NSArray *choices;
 @property (nonatomic, copy) UIColor *buttonColor;
+@property (nonatomic, copy) UIColor *promptColor;
+@property (nonatomic, strong) NSDictionary *otherOptions;
 @property (nonatomic, weak) id<JSQMessagesCustomToolbarDelegate> toolbarDelegate;
 @property (nonatomic, assign) BOOL isMultiSelect;
 

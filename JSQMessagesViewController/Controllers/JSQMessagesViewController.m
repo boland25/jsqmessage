@@ -1026,7 +1026,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         //NOTE: if we're re-setting to normal keyboard, we have to re-apply all of thisll
         self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
         self.inputToolbar.contentView.textView.delegate = self;
-
     }
     
 }

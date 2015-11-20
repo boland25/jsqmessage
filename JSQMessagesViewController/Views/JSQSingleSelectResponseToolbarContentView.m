@@ -11,7 +11,7 @@
 @interface JSQSingleSelectResponseToolbarContentView () <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic, strong) NSArray *choices;
-@property (nonatomic, copy) NSString *selectedChoice;
+@property (nonatomic, copy) NSDictionary *selectedChoice;
 
 @end
 
@@ -49,6 +49,7 @@
     }
     if (toolbarData.answerPrefix != nil) {
         self.answerPrefixLabel.text = toolbarData.answerPrefix;
+        self.answerPrefixLabel.textColor = toolbarData.promptColor;
     } else {
         self.answerPrefixLabel.text = @"";
     }
@@ -84,7 +85,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     //NSLog(@"chosen picker row ---------------- %@", self.choices[row]);
     self.sendButton.enabled = YES;
-    self.selectedChoice = self.choices[row];
+    self.selectedChoice = @{@(row) :self.choices[row]};
 }
 
 @end

@@ -1009,6 +1009,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //TODO : when the toolbar animates down it stretches the keyboard, the keybaord probably shouldn't be shown until
     [self.view layoutIfNeeded];
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
+    self.toolbarBottomLayoutGuide.constant = 0;
     [UIView animateWithDuration:0.30 animations:^{
             [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {

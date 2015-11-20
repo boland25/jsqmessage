@@ -999,16 +999,24 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         [self jsq_removeObservers];
         [self.keyboardController endListeningForKeyboard];
     }
-    //TODO: this constant needs to be updated when the toolbar is updated
-    //This i think will need to be a constraint on something, although not sure what
+   
     [self.inputToolbar setToolbarContentViewByType:toolBarType withContent:toolBarData];
-    [self.view layoutIfNeeded];
     
+    if (toolBarType == Standard) {
+        self.inputToolbar.contentView.hidden = YES;
+    }
+    
+    //TODO : when the toolbar animates down it stretches the keyboard, the keybaord probably shouldn't be shown until
+    [self.view layoutIfNeeded];
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         [self.view layoutIfNeeded]; // Called on parent view
-                     }];
+    [UIView animateWithDuration:0.30 animations:^{
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            if (toolBarType == Standard) {
+                self.inputToolbar.contentView.hidden = NO;
+            }
+            
+    }];
     
     //NOTE: this needs to be done AFTER the new contentView goes on screen and happens to be the standard keyboard
     if (toolBarType == Standard) {

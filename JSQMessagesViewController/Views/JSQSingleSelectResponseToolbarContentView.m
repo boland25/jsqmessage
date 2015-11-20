@@ -38,17 +38,19 @@
 
 - (void)setupToolbarWithData:(JSQToolbarData *)toolbarData {
     // TODO: for single select, this would carry in it, a UICOlor for the button, and a dictionary of picker information, also the prompt of what the answer should be
-    self.toolbarData = toolbarData;
+   
     self.choices = toolbarData.choices;
     self.pickerView.showsSelectionIndicator = YES;
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
     [self.pickerView reloadAllComponents];
-    if (self.toolbarData.buttonColor != nil) {
-        self.sendButton.tintColor = self.toolbarData.buttonColor;
+    if (toolbarData.buttonColor != nil) {
+        self.sendButton.tintColor = toolbarData.buttonColor;
     }
-    if (self.toolbarData.answerPrefix != nil) {
-        self.answerPrefixLabel.text = self.toolbarData.answerPrefix;
+    if (toolbarData.answerPrefix != nil) {
+        self.answerPrefixLabel.text = toolbarData.answerPrefix;
+    } else {
+        self.answerPrefixLabel.text = @"";
     }
     
     self.delegate = toolbarData.toolbarDelegate;

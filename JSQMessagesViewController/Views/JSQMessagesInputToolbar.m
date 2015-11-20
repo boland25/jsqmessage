@@ -83,16 +83,16 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
         JSQMessagesInputToolbar *newToolbar;
         switch (toolbarType) {
             case Standard:
-                NSLog(@"setup standard toolbar");
+                //NSLog(@"setup standard toolbar");
                  self.preferredDefaultHeight = 44.0;
                 break;
             case BinaryButton:
-                NSLog(@"Binary buton");
+               // NSLog(@"Binary buton");
                 [self jsq_removeObservers];
                 nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQBinaryResponseToolbarContentView class]) owner:nil options:nil];
                 break;
             case SingleSelect:
-                NSLog(@"SINGLE Select");
+               // NSLog(@"SINGLE Select");
                 
                 [self jsq_removeObservers];
                 // NOTE: this will be a picker view
@@ -101,18 +101,18 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
                 break;
             case MultiSelect:
                 //NOTE: this one is the multiple choice
-                NSLog(@"Multi Select");
+               // NSLog(@"Multi Select");
                 nibViews = [[NSBundle bundleForClass:[JSQMessagesInputToolbar class]] loadNibNamed:NSStringFromClass([JSQMultiSelectResponseToolbarContentView class]) owner:nil options:nil];
                 [self jsq_removeObservers];
             case Picker:
-                NSLog(@"Picker");
+              //  NSLog(@"Picker");
             default:
                 //TODO: set up standard here
                 break;
         }
     }
     self.inputToolbarType = toolbarType;
-    NSLog(@"should change toolbar now %i", self.inputToolbarType);
+    //NSLog(@"should change toolbar now %i", self.inputToolbarType);
     
     return nibViews.firstObject;
 }

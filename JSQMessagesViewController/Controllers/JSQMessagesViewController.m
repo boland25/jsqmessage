@@ -1002,7 +1002,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //TODO: this constant needs to be updated when the toolbar is updated
     //This i think will need to be a constraint on something, although not sure what
     [self.inputToolbar setToolbarContentViewByType:toolBarType withContent:toolBarData];
+    [self.view layoutIfNeeded];
+    
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         [self.view layoutIfNeeded]; // Called on parent view
+                     }];
+    
     //NOTE: this needs to be done AFTER the new contentView goes on screen and happens to be the standard keyboard
     if (toolBarType == Standard) {
         [self jsq_addObservers];

@@ -974,6 +974,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     [self jsq_setCollectionViewInsetsTopValue:self.topLayoutGuide.length + self.topContentAdditionalInset
                                   bottomValue:CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
+    NSLog(@"input toolbar frame %@", NSStringFromCGRect(self.inputToolbar.frame));
+    
 }
 
 - (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom
@@ -1010,8 +1012,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.view layoutIfNeeded];
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
     self.toolbarBottomLayoutGuide.constant = 0;
+    CGFloat totalContentOffset = self.collectionView.contentSize.height - (self.collectionView.bounds.size.height - self.inputToolbar.preferredDefaultHeight);
+    if (totalContentOffset < 0) {
+        totalContentOffset = 0;
+    }
     [UIView animateWithDuration:0.30 animations:^{
-            [self.view layoutIfNeeded];
+          //  [self.view layoutIfNeeded];
+        
+            CGPoint bottomOffset = CGPointMake(0, totalContentOffset);
+
+            [self.collectionView setContentOffset:bottomOffset animated:YES];
+            [self.collectionView setContentInset:UIEdgeInsetsMake(0, 0, self.inputToolbar.preferredDefaultHeight, 0)];
+        
+        [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {
             if (toolBarType == Standard) {
                 self.inputToolbar.contentView.hidden = NO;
@@ -1027,7 +1040,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
         self.inputToolbar.contentView.textView.delegate = self;
     }
-    
 }
 
 #pragma mark - Utilities

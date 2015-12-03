@@ -42,7 +42,7 @@
                         <constraint firstAttribute="trailing" secondItem="KhK-e0-tFC" secondAttribute="trailing" constant="8" id="zcG-KU-lxf"/>
                     </constraints>
                 </view>
-                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7h-RV-zeN">
+                <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7h-RV-zeN">
                     <rect key="frame" x="0.0" y="46" width="320" height="208"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

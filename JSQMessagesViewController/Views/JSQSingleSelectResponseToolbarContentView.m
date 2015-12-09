@@ -56,6 +56,7 @@
     
     self.delegate = toolbarData.toolbarDelegate;
     self.sendButton.enabled = NO;
+    [self setupDefaultFirstRowChosen];
 }
 
 - (IBAction)sendButtonWasTapped:(id)sender {
@@ -64,6 +65,12 @@
             [self.delegate customToolbarSendButtonWasPressed:@[self.selectedChoice]];
         }
     }
+}
+
+- (void)setupDefaultFirstRowChosen {
+    [self.pickerView selectRow:0 inComponent:0 animated:false];
+    self.selectedChoice = @{@(0) : self.choices[0]};
+    self.sendButton.enabled = YES;
 }
 
 #pragma mark - UIPickerViewDataSource

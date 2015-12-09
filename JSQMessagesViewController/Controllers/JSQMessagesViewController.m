@@ -165,7 +165,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                                                      delegate:self];
             
         }
-
     }
 }
 
@@ -997,10 +996,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData {
 
     //NOTE: this needs to be done before remove the current contentView off screen
-    if (toolBarType != Standard) {
-        [self jsq_removeObservers];
-        [self.keyboardController endListeningForKeyboard];
-    }
+    [self jsq_removeObservers];
+    [self.keyboardController endListeningForKeyboard];
    
     [self.inputToolbar setToolbarContentViewByType:toolBarType withContent:toolBarData];
     

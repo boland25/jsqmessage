@@ -121,6 +121,7 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     
     JSQMessagesToolbarContentView *toolbarContentView = [self loadToolbarContentView:toolbarType];
     toolbarContentView.frame = self.contentView.frame;
+    [self jsq_removeObservers];
     [self.contentView removeFromSuperview];
     if (self.inputToolbarType != Standard) {
         // TODO: load the toolbardata

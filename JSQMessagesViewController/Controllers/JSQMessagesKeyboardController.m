@@ -150,6 +150,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     [self jsq_unregisterForNotifications];
 
     [self jsq_setKeyboardViewHidden:NO];
+    [self jsq_removeKeyboardFrameObserver];
     self.keyboardView = nil;
 }
 

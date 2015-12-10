@@ -107,15 +107,17 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     }
 
     _keyboardView = keyboardView;
+    
 
     if (keyboardView && !_jsq_isObserving) {
         [_keyboardView addObserver:self
                         forKeyPath:NSStringFromSelector(@selector(frame))
                            options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
                            context:kJSQMessagesKeyboardControllerKeyValueObservingContext];
-
+        
         _jsq_isObserving = YES;
     }
+    
 }
 
 #pragma mark - Getters
@@ -348,14 +350,17 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             if (CGRectGetMinY(newKeyboardViewFrame) == CGRectGetMinY(self.keyboardView.frame)) {
                 return;
             }
-
-            [UIView animateWithDuration:0.0
-                                  delay:0.0
-                                options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionNone
-                             animations:^{
-                                 self.keyboardView.frame = newKeyboardViewFrame;
-                             }
-                             completion:nil];
+            NSLog(@"KEYBOARD CONTROLLER %i", self.toolbarType);
+            if (self.toolbarType == Standard) {
+                [UIView animateWithDuration:0.0
+                                      delay:0.0
+                                    options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionNone
+                                 animations:^{
+                                     self.keyboardView.frame = newKeyboardViewFrame;
+                                 }
+                                 completion:nil];
+            }
+           
         }
             break;
 
@@ -394,6 +399,10 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
         default:
             break;
     }
+}
+
+- (void)setupPanGestureRecognizer {
+     [self.panGestureRecognizer addTarget:self action:@selector(jsq_handlePanGestureRecognizer:)];
 }
 
 @end

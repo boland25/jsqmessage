@@ -280,4 +280,6 @@
  */
 - (void)jsq_updateCollectionViewInsets;
 
+- (void)closeCustomInputToolbar;
+
 @end

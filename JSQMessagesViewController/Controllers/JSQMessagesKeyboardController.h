@@ -23,6 +23,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "JSQToolbarData.h"
 
 @class JSQMessagesKeyboardController;
 
@@ -110,6 +111,8 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
  */
 @property (assign, nonatomic, readonly) CGRect currentKeyboardFrame;
 
+@property (assign, nonatomic) JSQInputToolbarType *toolbarType;
+
 /**
  *  Creates a new keyboard controller object with the specified textView, contextView, panGestureRecognizer, and delegate.
  *
@@ -134,5 +137,13 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
  *  Tells the keyboard controller that it should end listening for system keyboard notifications.
  */
 - (void)endListeningForKeyboard;
+
+/**
+ * Call this method when the input toolbar is custom and not a standard keyboard
+ */
+- (void)setupPanGestureRecognizer;
+
+
+- (void)setKeyboardView:(UIView *)keyboardView;
 
 @end

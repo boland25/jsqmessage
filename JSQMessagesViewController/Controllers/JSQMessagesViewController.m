@@ -821,15 +821,21 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame
 {
-    if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBottomLayoutGuide.constant == 0.0f) {
-        return;
+    if (self.inputToolbar.inputToolbarType == Standard) {
+        if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBottomLayoutGuide.constant == 0.0f) {
+            return;
+        }
+
+
+    
+        CGFloat heightFromBottom = CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
+
+        heightFromBottom = MAX(0.0f, heightFromBottom);
+
+        [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
+    } else {
+        [self closeCustomInputToolbar];
     }
-
-    CGFloat heightFromBottom = CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(keyboardFrame);
-
-    heightFromBottom = MAX(0.0f, heightFromBottom);
-
-    [self jsq_setToolbarBottomLayoutGuideConstant:heightFromBottom];
 }
 
 - (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant
@@ -839,6 +845,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     [self.view layoutIfNeeded];
 
     [self jsq_updateCollectionViewInsets];
+}
+
+- (void)closeCustomInputToolbar {
+    [self setToolbarByType:Standard withContent:nil];
 }
 
 - (void)jsq_updateKeyboardTriggerPoint
@@ -1028,7 +1038,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             }
             
     }];
-    
+    self.keyboardController.toolbarType = toolBarType;
     //NOTE: this needs to be done AFTER the new contentView goes on screen and happens to be the standard keyboard
     if (toolBarType == Standard) {
         [self jsq_addObservers];
@@ -1036,6 +1046,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         //NOTE: if we're re-setting to normal keyboard, we have to re-apply all of thisll
         self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
         self.inputToolbar.contentView.textView.delegate = self;
+    } else {
+        [self.keyboardController setupPanGestureRecognizer];
+        self.keyboardController.keyboardView = self.inputToolbar;
     }
 }
 

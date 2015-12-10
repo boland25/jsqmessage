@@ -273,7 +273,7 @@
  * This is called once the default keyboard is setup, its not made to setup the original keyboard
  * @param toolBarType is an enum that is sent to change between binary, singleselect, multi-select, and standard
  */
-- (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData;
+- (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData animationDuration:(CGFloat)animationDuration;
 
 /**
  * update CollectionView insets

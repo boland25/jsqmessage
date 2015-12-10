@@ -224,7 +224,6 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
     NSDictionary *userInfo = [notification userInfo];
 
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-
     if (CGRectIsNull(keyboardEndFrame)) {
         return;
     }
@@ -350,7 +349,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
             if (CGRectGetMinY(newKeyboardViewFrame) == CGRectGetMinY(self.keyboardView.frame)) {
                 return;
             }
-            NSLog(@"KEYBOARD CONTROLLER %i", self.toolbarType);
+            //changing the keyboard position here one Y pixel at a time
+        //    NSLog(@"KEYBOARD CONTROLLER %i new keyboard frame %@ Current key frame %@", self.toolbarType, NSStringFromCGRect(newKeyboardViewFrame), NSStringFromCGRect(self.keyboardView.frame));
             if (self.toolbarType == Standard) {
                 [UIView animateWithDuration:0.0
                                       delay:0.0

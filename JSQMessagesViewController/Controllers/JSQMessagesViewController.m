@@ -848,7 +848,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 }
 
 - (void)closeCustomInputToolbar {
-    [self setToolbarByType:Standard withContent:nil];
+    self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
+    self.toolbarBottomLayoutGuide.constant = 44;
+    [self jsq_updateCollectionViewInsets];
+    [self setToolbarByType:Standard withContent:nil animationDuration:0.0];
 }
 
 - (void)jsq_updateKeyboardTriggerPoint
@@ -983,7 +986,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     [self jsq_setCollectionViewInsetsTopValue:self.topLayoutGuide.length + self.topContentAdditionalInset
                                   bottomValue:CGRectGetMaxY(self.collectionView.frame) - CGRectGetMinY(self.inputToolbar.frame)];
-    NSLog(@"input toolbar frame %@", NSStringFromCGRect(self.inputToolbar.frame));
     
 }
 
@@ -1003,7 +1005,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 #pragma mark - Custom Input Toolbar
 
-- (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData {
+- (void)setToolbarByType:(JSQInputToolbarType)toolBarType withContent:(JSQToolbarData *)toolBarData animationDuration:(CGFloat)animationDuration {
 
     //NOTE: this needs to be done before remove the current contentView off screen
     [self jsq_removeObservers];
@@ -1023,7 +1025,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (totalContentOffset < 0) {
         totalContentOffset = 0;
     }
-    [UIView animateWithDuration:0.30 animations:^{
+    [UIView animateWithDuration:animationDuration animations:^{
           //  [self.view layoutIfNeeded];
         
             CGPoint bottomOffset = CGPointMake(0, totalContentOffset);

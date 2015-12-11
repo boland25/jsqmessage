@@ -81,7 +81,7 @@ FOUNDATION_EXPORT NSString * const JSQMessagesKeyboardControllerUserInfoKeyKeybo
 /**
  *  The text view in which the user is editing with the system keyboard.
  */
-@property (weak, nonatomic, readonly) UITextView *textView;
+@property (weak, nonatomic) UITextView *textView;
 
 /**
  *  The view in which the keyboard will be shown. This should be the parent or a sibling of `textView`.

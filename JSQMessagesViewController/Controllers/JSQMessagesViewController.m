@@ -1026,10 +1026,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         totalContentOffset = 0;
     }
     [UIView animateWithDuration:animationDuration animations:^{
-          //  [self.view layoutIfNeeded];
         
             CGPoint bottomOffset = CGPointMake(0, totalContentOffset);
-
             [self.collectionView setContentOffset:bottomOffset animated:YES];
             [self.collectionView setContentInset:UIEdgeInsetsMake(0, 0, self.inputToolbar.preferredDefaultHeight, 0)];
         
@@ -1044,10 +1042,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //NOTE: this needs to be done AFTER the new contentView goes on screen and happens to be the standard keyboard
     if (toolBarType == Standard) {
         [self jsq_addObservers];
+        self.keyboardController.textView =  self.inputToolbar.contentView.textView;
         [self.keyboardController beginListeningForKeyboard];
         //NOTE: if we're re-setting to normal keyboard, we have to re-apply all of thisll
         self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
         self.inputToolbar.contentView.textView.delegate = self;
+        [self jsq_updateKeyboardTriggerPoint];
+        
+
     } else {
         [self.keyboardController setupPanGestureRecognizer];
         self.keyboardController.keyboardView = self.inputToolbar;

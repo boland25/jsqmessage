@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="JSQSingleSelectResponseTableViewCell" editingAccessoryType="checkmark" rowHeight="44" id="0is-Ms-gEL" customClass="JSQSingleSelectResponseTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0is-Ms-gEL" id="fOV-j8-mTn">
+                <rect key="frame" x="0.0" y="0.0" width="281" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEk-4G-uZr">
+                        <rect key="frame" x="25" y="11" width="235" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.29019607843137257" green="0.29019607843137257" blue="0.29019607843137257" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tEk-4G-uZr" firstAttribute="top" secondItem="fOV-j8-mTn" secondAttribute="top" constant="11" id="2tD-WG-8WL"/>
+                    <constraint firstAttribute="trailing" secondItem="tEk-4G-uZr" secondAttribute="trailing" constant="21" id="6GA-OY-Wt1"/>
+                    <constraint firstItem="tEk-4G-uZr" firstAttribute="leading" secondItem="fOV-j8-mTn" secondAttribute="leading" constant="25" id="SrV-g6-3Eo"/>
+                    <constraint firstAttribute="bottom" secondItem="tEk-4G-uZr" secondAttribute="bottom" constant="12" id="wGF-lB-PA4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="titleLabel" destination="tEk-4G-uZr" id="zKr-TW-QOf"/>
+            </connections>
+            <point key="canvasLocation" x="365" y="235"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -7,6 +7,7 @@
 //
 
 #import "JSQSingleSelectResponseToolbarContentView.h"
+#import "JSQSingleSelectResponseTableViewCell.h"
 
 @interface JSQSingleSelectResponseToolbarContentView () <UIPickerViewDelegate, UIPickerViewDataSource>
 
@@ -14,6 +15,8 @@
 @property (nonatomic, copy) NSDictionary *selectedChoice;
 
 @end
+
+static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
 
 @implementation JSQSingleSelectResponseToolbarContentView
 
@@ -32,6 +35,7 @@
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     self.backgroundColor = [UIColor clearColor];
+    [self.tableView registerNib:[UINib nibWithNibName:@"JSQSingleSelectResponseTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
 }
 
 #pragma mark JSQToolbarSetup Protocol
@@ -94,5 +98,22 @@
     self.sendButton.enabled = YES;
     self.selectedChoice = @{@(row) :self.choices[row]};
 }
+
+#pragma mark UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.choices.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    JSQSingleSelectResponseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    [cell configureCell:self.choices[indexPath.row]];
+    
+
+}
+
+
+
 
 @end

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,9 +14,16 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oL9-Wz-aGd">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
                     <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xm4-8K-LKI">
+                            <rect key="frame" x="0.0" y="39" width="320" height="176"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="zLj-cx-TfS" id="Bec-EV-uj3"/>
+                                <outlet property="delegate" destination="zLj-cx-TfS" id="lyF-Hh-lvo"/>
+                            </connections>
+                        </tableView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhK-e0-tFC">
                             <rect key="frame" x="245" y="0.0" width="67" height="44"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="beP-f2-Iia"/>
                                 <constraint firstAttribute="width" constant="67" id="vvK-Bb-SDv"/>
@@ -29,13 +36,11 @@
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I've Been feeling:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhG-g3-jms">
                             <rect key="frame" x="13" y="11" width="153" height="21"/>
-                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="KhK-e0-tFC" firstAttribute="top" secondItem="oL9-Wz-aGd" secondAttribute="top" id="zAY-oy-hLA"/>
@@ -44,11 +49,9 @@
                 </view>
                 <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7h-RV-zeN">
                     <rect key="frame" x="0.0" y="46" width="320" height="208"/>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </pickerView>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Q7h-RV-zeN" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" id="2ps-Sb-bDM"/>
@@ -83,6 +86,7 @@
                 <outlet property="bgView" destination="oL9-Wz-aGd" id="Nb6-SM-j0D"/>
                 <outlet property="pickerView" destination="Q7h-RV-zeN" id="3Lr-GR-vM3"/>
                 <outlet property="sendButton" destination="KhK-e0-tFC" id="dy0-Bh-Cww"/>
+                <outlet property="tableView" destination="Xm4-8K-LKI" id="EOJ-e0-idl"/>
             </connections>
             <point key="canvasLocation" x="268" y="653"/>
         </view>

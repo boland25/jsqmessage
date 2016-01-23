@@ -14,8 +14,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oL9-Wz-aGd">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xm4-8K-LKI">
-                            <rect key="frame" x="0.0" y="39" width="320" height="176"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="248" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xm4-8K-LKI">
+                            <rect key="frame" x="0.0" y="39" width="320" height="171"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="zLj-cx-TfS" id="Bec-EV-uj3"/>
@@ -43,48 +43,36 @@
                     </subviews>
                     <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Xm4-8K-LKI" secondAttribute="bottom" constant="39" id="0hf-2f-jtx"/>
+                        <constraint firstItem="Xm4-8K-LKI" firstAttribute="width" secondItem="oL9-Wz-aGd" secondAttribute="width" id="ByY-SU-wgl"/>
+                        <constraint firstItem="Xm4-8K-LKI" firstAttribute="top" secondItem="oL9-Wz-aGd" secondAttribute="top" constant="39" id="Dc6-jw-itB"/>
+                        <constraint firstAttribute="bottom" secondItem="Xm4-8K-LKI" secondAttribute="bottom" constant="44" id="Qja-Tp-0ku"/>
+                        <constraint firstItem="Xm4-8K-LKI" firstAttribute="leading" secondItem="oL9-Wz-aGd" secondAttribute="leading" id="bGo-MU-YHx"/>
+                        <constraint firstAttribute="trailing" secondItem="Xm4-8K-LKI" secondAttribute="trailing" id="vVh-Nj-xRr"/>
                         <constraint firstItem="KhK-e0-tFC" firstAttribute="top" secondItem="oL9-Wz-aGd" secondAttribute="top" id="zAY-oy-hLA"/>
                         <constraint firstAttribute="trailing" secondItem="KhK-e0-tFC" secondAttribute="trailing" constant="8" id="zcG-KU-lxf"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="0hf-2f-jtx"/>
+                            <exclude reference="ByY-SU-wgl"/>
+                        </mask>
+                    </variation>
                 </view>
-                <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7h-RV-zeN">
-                    <rect key="frame" x="0.0" y="46" width="320" height="208"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </pickerView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Q7h-RV-zeN" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" id="2ps-Sb-bDM"/>
-                <constraint firstAttribute="bottom" secondItem="Q7h-RV-zeN" secondAttribute="bottom" id="LS3-qJ-8bn"/>
-                <constraint firstAttribute="trailing" secondItem="Q7h-RV-zeN" secondAttribute="trailing" id="Soh-cT-I7C"/>
                 <constraint firstAttribute="bottom" secondItem="oL9-Wz-aGd" secondAttribute="bottom" id="W8N-i2-8Jz"/>
-                <constraint firstAttribute="trailing" secondItem="Q7h-RV-zeN" secondAttribute="trailing" id="bkP-KD-qMA"/>
-                <constraint firstItem="Q7h-RV-zeN" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" id="bp5-VN-Yhe"/>
                 <constraint firstAttribute="trailing" secondItem="oL9-Wz-aGd" secondAttribute="trailing" id="dTs-V3-EML"/>
-                <constraint firstAttribute="trailing" secondItem="Q7h-RV-zeN" secondAttribute="trailing" id="eoD-FR-bhm"/>
                 <constraint firstItem="oL9-Wz-aGd" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" id="gF4-9F-M4z"/>
-                <constraint firstAttribute="bottom" secondItem="Q7h-RV-zeN" secondAttribute="bottom" id="nMY-DA-xkU"/>
-                <constraint firstItem="Q7h-RV-zeN" firstAttribute="top" secondItem="zLj-cx-TfS" secondAttribute="top" constant="46" id="qiz-gB-wsw"/>
-                <constraint firstItem="Q7h-RV-zeN" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" id="xRp-sK-GCL"/>
-                <constraint firstAttribute="bottom" secondItem="Q7h-RV-zeN" secondAttribute="bottom" id="yG4-Ye-Tpn"/>
                 <constraint firstItem="oL9-Wz-aGd" firstAttribute="top" secondItem="zLj-cx-TfS" secondAttribute="top" id="zo9-06-0zm"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="2ps-Sb-bDM"/>
-                    <exclude reference="LS3-qJ-8bn"/>
-                    <exclude reference="bkP-KD-qMA"/>
-                    <exclude reference="eoD-FR-bhm"/>
-                    <exclude reference="nMY-DA-xkU"/>
-                    <exclude reference="xRp-sK-GCL"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="answerPrefixLabel" destination="GhG-g3-jms" id="Rrc-Kb-RmH"/>
                 <outlet property="bgView" destination="oL9-Wz-aGd" id="Nb6-SM-j0D"/>
-                <outlet property="pickerView" destination="Q7h-RV-zeN" id="3Lr-GR-vM3"/>
+                <outlet property="bottomConstraint" destination="Qja-Tp-0ku" id="Z7H-wc-23q"/>
                 <outlet property="sendButton" destination="KhK-e0-tFC" id="dy0-Bh-Cww"/>
                 <outlet property="tableView" destination="Xm4-8K-LKI" id="EOJ-e0-idl"/>
             </connections>

@@ -22,7 +22,7 @@
 
 - (void)configureCell:(id)choiceData {
     NSLog(@"CHOICE Data %@", choiceData);
-    self.titleLabel.text = @"Test";
+    self.titleLabel.text = choiceData;
 }
 
 @end

@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) NSArray *choices;
 @property (nonatomic, copy) NSDictionary *selectedChoice;
+@property (nonatomic, assign) NSInteger selectedRow;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomConstraint;
 
 @end
 
@@ -35,7 +37,8 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     self.backgroundColor = [UIColor clearColor];
-    [self.tableView registerNib:[UINib nibWithNibName:@"JSQSingleSelectResponseTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"JSQSingleSelectResponseTableViewCell" bundle:[NSBundle bundleForClass:[JSQMessagesInputToolbar class]]] forCellReuseIdentifier:cellIdentifier];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 #pragma mark JSQToolbarSetup Protocol
@@ -44,10 +47,6 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
     // TODO: for single select, this would carry in it, a UICOlor for the button, and a dictionary of picker information, also the prompt of what the answer should be
    
     self.choices = toolbarData.choices;
-    self.pickerView.showsSelectionIndicator = YES;
-    self.pickerView.dataSource = self;
-    self.pickerView.delegate = self;
-    [self.pickerView reloadAllComponents];
     if (toolbarData.buttonColor != nil) {
         self.sendButton.tintColor = toolbarData.buttonColor;
     }
@@ -61,6 +60,7 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
     self.delegate = toolbarData.toolbarDelegate;
     self.sendButton.enabled = NO;
     [self setupDefaultFirstRowChosen];
+    [self calculateBottomConstraint:self.choices.count];
 }
 
 - (IBAction)sendButtonWasTapped:(id)sender {
@@ -72,26 +72,23 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
 }
 
 - (void)setupDefaultFirstRowChosen {
-    [self.pickerView selectRow:0 inComponent:0 animated:false];
     self.selectedChoice = @{@(0) : self.choices[0]};
     self.sendButton.enabled = YES;
 }
 
+- (void)calculateBottomConstraint:(NSInteger)choiceCount {
+    if (choiceCount == 3) {
+        self.bottomConstraint.constant += 44;
+        ;
+    } else if (choiceCount == 2 ){
+        self.bottomConstraint.constant += 88;
+    } else {
+        return;
+    }
+}
+
 #pragma mark - UIPickerViewDataSource
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.choices.count;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    NSString *selection = self.choices[row];
-    return selection;
-}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     //NSLog(@"chosen picker row ---------------- %@", self.choices[row]);
@@ -106,13 +103,18 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    JSQSingleSelectResponseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    JSQSingleSelectResponseTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"JSQSingleSelectResponseTableViewCell" forIndexPath:indexPath];
     [cell configureCell:self.choices[indexPath.row]];
-    
+    if (indexPath.row == 0) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    return cell;
 
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:[NSIndexPath indexPathWithIndex:self.selectedRow] animated:NO];
+}
 
 
 

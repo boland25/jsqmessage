@@ -38,7 +38,6 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
     
     self.backgroundColor = [UIColor clearColor];
     [self.tableView registerNib:[UINib nibWithNibName:@"JSQSingleSelectResponseTableViewCell" bundle:[NSBundle bundleForClass:[JSQMessagesInputToolbar class]]] forCellReuseIdentifier:cellIdentifier];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 #pragma mark JSQToolbarSetup Protocol
@@ -74,6 +73,12 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
 - (void)setupDefaultFirstRowChosen {
     self.selectedChoice = @{@(0) : self.choices[0]};
     self.sendButton.enabled = YES;
+}
+
+- (UIView *)createBorder {
+    UIView *border = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 1)];
+    border.backgroundColor = [UIColor colorWithRed:0.83 green:0.83 blue:0.84 alpha:1.0];
+    return border;
 }
 
 - (void)calculateBottomConstraint:(NSInteger)choiceCount {
@@ -116,6 +121,21 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
     [tableView deselectRowAtIndexPath:[NSIndexPath indexPathWithIndex:self.selectedRow] animated:NO];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 1.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [self createBorder];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 1.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [self createBorder];
+}
 
 
 @end

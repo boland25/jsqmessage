@@ -15,7 +15,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="248" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xm4-8K-LKI">
-                            <rect key="frame" x="0.0" y="39" width="320" height="171"/>
+                            <rect key="frame" x="0.0" y="36" width="320" height="218"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="zLj-cx-TfS" id="Bec-EV-uj3"/>
@@ -45,8 +45,8 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Xm4-8K-LKI" secondAttribute="bottom" constant="39" id="0hf-2f-jtx"/>
                         <constraint firstItem="Xm4-8K-LKI" firstAttribute="width" secondItem="oL9-Wz-aGd" secondAttribute="width" id="ByY-SU-wgl"/>
-                        <constraint firstItem="Xm4-8K-LKI" firstAttribute="top" secondItem="oL9-Wz-aGd" secondAttribute="top" constant="39" id="Dc6-jw-itB"/>
-                        <constraint firstAttribute="bottom" secondItem="Xm4-8K-LKI" secondAttribute="bottom" constant="44" id="Qja-Tp-0ku"/>
+                        <constraint firstItem="Xm4-8K-LKI" firstAttribute="top" secondItem="oL9-Wz-aGd" secondAttribute="top" constant="36" id="Dc6-jw-itB"/>
+                        <constraint firstAttribute="bottom" secondItem="Xm4-8K-LKI" secondAttribute="bottom" id="Qja-Tp-0ku"/>
                         <constraint firstItem="Xm4-8K-LKI" firstAttribute="leading" secondItem="oL9-Wz-aGd" secondAttribute="leading" id="bGo-MU-YHx"/>
                         <constraint firstAttribute="trailing" secondItem="Xm4-8K-LKI" secondAttribute="trailing" id="vVh-Nj-xRr"/>
                         <constraint firstItem="KhK-e0-tFC" firstAttribute="top" secondItem="oL9-Wz-aGd" secondAttribute="top" id="zAY-oy-hLA"/>

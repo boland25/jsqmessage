@@ -83,10 +83,12 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
 
 - (void)calculateBottomConstraint:(NSInteger)choiceCount {
     if (choiceCount == 3) {
-        self.bottomConstraint.constant += 44;
+        self.bottomConstraint.constant += 88;
         ;
     } else if (choiceCount == 2 ){
-        self.bottomConstraint.constant += 88;
+        self.bottomConstraint.constant += 132;
+    } else if (choiceCount == 1) {
+        self.bottomConstraint.constant += 44;
     } else {
         return;
     }

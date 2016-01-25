@@ -44,7 +44,7 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
 
 - (void)setupToolbarWithData:(JSQToolbarData *)toolbarData {
     // TODO: for single select, this would carry in it, a UICOlor for the button, and a dictionary of picker information, also the prompt of what the answer should be
-   
+    self.selectedRow = 0;
     self.choices = toolbarData.choices;
     if (toolbarData.buttonColor != nil) {
         self.sendButton.tintColor = toolbarData.buttonColor;
@@ -71,7 +71,7 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
 }
 
 - (void)setupDefaultFirstRowChosen {
-    self.selectedChoice = @{@(0) : self.choices[0]};
+    self.selectedChoice = @{@(self.selectedRow) : self.choices[0]};
     self.sendButton.enabled = YES;
 }
 
@@ -110,15 +110,27 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JSQSingleSelectResponseTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"JSQSingleSelectResponseTableViewCell" forIndexPath:indexPath];
     [cell configureCell:self.choices[indexPath.row]];
-    if (indexPath.row == 0) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    if (indexPath.row == self.selectedRow) {
+        [cell setAsSelected:YES];
     }
     return cell;
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:[NSIndexPath indexPathWithIndex:self.selectedRow] animated:NO];
+    //deselect the hightled row
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    //get the checkmarked cell and uncheck it
+    NSLog(@"selected row %i", self.selectedRow);
+    NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
+    JSQSingleSelectResponseTableViewCell *cell = [tableView cellForRowAtIndexPath:selectedIndexPath];
+    [cell setAsSelected:NO];
+    
+    //checkmark the new cell
+    cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell setAsSelected:YES];
+    
+    self.selectedRow = indexPath.row;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

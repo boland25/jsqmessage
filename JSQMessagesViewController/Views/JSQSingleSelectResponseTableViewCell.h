@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 - (void)configureCell:(id)choiceData;
+- (void)setAsSelected:(BOOL)isSelected;
 
 @end

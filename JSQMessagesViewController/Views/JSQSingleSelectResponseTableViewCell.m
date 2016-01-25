@@ -20,6 +20,15 @@
     // Configure the view for the selected state
 }
 
+- (void)setAsSelected:(BOOL)isSelected {
+    if (isSelected) {
+        self.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        self.accessoryType = UITableViewCellAccessoryNone;
+    }
+}
+
+
 - (void)configureCell:(id)choiceData {
     NSLog(@"CHOICE Data %@", choiceData);
     self.titleLabel.text = choiceData;

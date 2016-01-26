@@ -354,7 +354,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                     return;
                 }
                 //changing the keyboard position here one Y pixel at a time
-                NSLog(@"KEYBOARD CONTROLLER %i new keyboard frame %@ Current key frame %@ keyboard view %@", self.toolbarType, NSStringFromCGRect(newKeyboardViewFrame), NSStringFromCGRect(self.keyboardView.frame), self.keyboardView);
+            //    NSLog(@"KEYBOARD CONTROLLER %i new keyboard frame %@ Current key frame %@ keyboard view %@", self.toolbarType, NSStringFromCGRect(newKeyboardViewFrame), NSStringFromCGRect(self.keyboardView.frame), self.keyboardView);
                 if (self.toolbarType == Standard) {
                     [UIView animateWithDuration:0.0
                                           delay:0.0
@@ -386,7 +386,7 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                 BOOL shouldHide = (userIsScrollingDown && userIsDraggingNearThresholdForDismissing);
 
                 newKeyboardViewFrame.origin.y = shouldHide ? contextViewWindowHeight : (contextViewWindowHeight - keyboardViewHeight);
-                NSLog(@"does keyboard view exists here %@ in failed gsture case %@", self.keyboardView, NSStringFromCGRect(self.keyboardView.frame));
+            //    NSLog(@"does keyboard view exists here %@ in failed gsture case %@", self.keyboardView, NSStringFromCGRect(self.keyboardView.frame));
                 [UIView animateWithDuration:0.25
                                       delay:0.0
                                     options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseOut

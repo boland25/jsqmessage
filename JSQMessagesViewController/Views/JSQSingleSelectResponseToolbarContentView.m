@@ -44,7 +44,7 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
 
 - (void)setupToolbarWithData:(JSQToolbarData *)toolbarData {
     // TODO: for single select, this would carry in it, a UICOlor for the button, and a dictionary of picker information, also the prompt of what the answer should be
-    self.selectedRow = 0;
+    self.selectedRow = -1;
     self.choices = toolbarData.choices;
     if (toolbarData.buttonColor != nil) {
         self.sendButton.tintColor = toolbarData.buttonColor;
@@ -55,10 +55,8 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
     } else {
         self.answerPrefixLabel.text = @"";
     }
-    
     self.delegate = toolbarData.toolbarDelegate;
     self.sendButton.enabled = NO;
-    [self setupDefaultFirstRowChosen];
     [self calculateBottomConstraint:self.choices.count];
 }
 
@@ -86,7 +84,7 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
         self.bottomConstraint.constant += 88;
         ;
     } else if (choiceCount == 2 ){
-        self.bottomConstraint.constant += 132;
+        return;
     } else if (choiceCount == 1) {
         self.bottomConstraint.constant += 44;
     } else {
@@ -99,7 +97,7 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     //NSLog(@"chosen picker row ---------------- %@", self.choices[row]);
-    self.sendButton.enabled = YES;
+    
     self.selectedChoice = @{@(row) :self.choices[row]};
 }
 
@@ -123,16 +121,21 @@ static NSString *cellIdentifier = @"JSQSingleSelectResponseTableViewCell";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     //get the checkmarked cell and uncheck it
-    NSLog(@"selected row %i", self.selectedRow);
-    NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
-    JSQSingleSelectResponseTableViewCell *cell = [tableView cellForRowAtIndexPath:selectedIndexPath];
-    [cell setAsSelected:NO];
-    
+    if (self.selectedRow != -1) {
+      //  NSLog(@"selected row %i", self.selectedRow);
+        NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
+        JSQSingleSelectResponseTableViewCell *cell = [tableView cellForRowAtIndexPath:selectedIndexPath];
+        [cell setAsSelected:NO];
+    }
     //checkmark the new cell
-    cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell setAsSelected:YES];
+    JSQSingleSelectResponseTableViewCell *selCell = [tableView cellForRowAtIndexPath:indexPath];
+    [selCell setAsSelected:YES];
     
     self.selectedRow = indexPath.row;
+    if (self.selectedRow != -1) {
+        self.sendButton.enabled = YES;
+    }
+    self.selectedChoice = @{@(self.selectedRow) :self.choices[self.selectedRow]};
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

@@ -14,7 +14,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oL9-Wz-aGd">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="248" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xm4-8K-LKI">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xm4-8K-LKI">
                             <rect key="frame" x="0.0" y="36" width="320" height="218"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -23,9 +23,9 @@
                             </connections>
                         </tableView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhK-e0-tFC">
-                            <rect key="frame" x="245" y="0.0" width="67" height="44"/>
+                            <rect key="frame" x="245" y="0.0" width="67" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="44" id="beP-f2-Iia"/>
+                                <constraint firstAttribute="height" constant="40" id="beP-f2-Iia"/>
                                 <constraint firstAttribute="width" constant="67" id="vvK-Bb-SDv"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
@@ -62,10 +62,10 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="oL9-Wz-aGd" secondAttribute="bottom" id="W8N-i2-8Jz"/>
-                <constraint firstAttribute="trailing" secondItem="oL9-Wz-aGd" secondAttribute="trailing" id="dTs-V3-EML"/>
-                <constraint firstItem="oL9-Wz-aGd" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" id="gF4-9F-M4z"/>
-                <constraint firstItem="oL9-Wz-aGd" firstAttribute="top" secondItem="zLj-cx-TfS" secondAttribute="top" id="zo9-06-0zm"/>
+                <constraint firstAttribute="bottom" secondItem="oL9-Wz-aGd" secondAttribute="bottom" identifier="BG to Superview Bottom" id="W8N-i2-8Jz"/>
+                <constraint firstAttribute="trailing" secondItem="oL9-Wz-aGd" secondAttribute="trailing" identifier="BG to Superview Trailing" id="dTs-V3-EML"/>
+                <constraint firstItem="oL9-Wz-aGd" firstAttribute="leading" secondItem="zLj-cx-TfS" secondAttribute="leading" identifier="BG to Superview Leading" id="gF4-9F-M4z"/>
+                <constraint firstItem="oL9-Wz-aGd" firstAttribute="top" secondItem="zLj-cx-TfS" secondAttribute="top" identifier="BG to Superview Top" id="zo9-06-0zm"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

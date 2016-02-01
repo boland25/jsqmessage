@@ -96,4 +96,15 @@
                                                    font:(UIFont *)font
                                                diameter:(NSUInteger)diameter;
 
+/**
+ * The same method as above but it gives control over the background image stoke, lets you set it as a color
+ */
++ (JSQMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
+                                        backgroundColor:(UIColor *)backgroundColor
+                                            borderColor:(UIColor *)borderColor
+                                              textColor:(UIColor *)textColor
+                                                   font:(UIFont *)font
+                                               diameter:(NSUInteger)diameter;
+
+
 @end

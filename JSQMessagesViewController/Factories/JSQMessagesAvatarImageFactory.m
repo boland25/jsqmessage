@@ -95,6 +95,21 @@
                                               placeholderImage:avatarImage];
 }
 
++ (JSQMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
+                                        backgroundColor:(UIColor *)backgroundColor
+                                            borderColor:(UIColor *)borderColor
+                                              textColor:(UIColor *)textColor
+                                                   font:(UIFont *)font
+                                               diameter:(NSUInteger)diameter
+{
+    
+    UIImage *avatarImage = [JSQMessagesAvatarImageFactory jsq_imageWitInitials:userInitials backgroundColor:backgroundColor borderColor:borderColor textColor:textColor font:font diameter:diameter];
+    
+    UIImage *avatarHighlightedImage = [JSQMessagesAvatarImageFactory jsq_circularImage:avatarImage withDiameter:diameter highlightedColor:[UIColor colorWithWhite:0.1f alpha:0.3f]];
+    
+    return [[JSQMessagesAvatarImage alloc] initWithAvatarImage:avatarImage highlightedImage:avatarHighlightedImage placeholderImage:avatarImage];
+}
+
 #pragma mark - Private
 
 + (UIImage *)jsq_imageWitInitials:(NSString *)initials
@@ -130,7 +145,6 @@
     UIGraphicsBeginImageContextWithOptions(frame.size, NO, [UIScreen mainScreen].scale);
     {
         CGContextRef context = UIGraphicsGetCurrentContext();
-
         CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
         CGContextFillRect(context, frame);
         [initials drawAtPoint:drawPoint withAttributes:attributes];
@@ -171,5 +185,54 @@
     
     return newImage;
 }
+
++ (UIImage *)jsq_imageWitInitials:(NSString *)initials
+                  backgroundColor:(UIColor *)backgroundColor
+                      borderColor:(UIColor *)borderColor
+                        textColor:(UIColor *)textColor
+                             font:(UIFont *)font
+                         diameter:(NSUInteger)diameter
+{
+    NSParameterAssert(initials != nil);
+    NSParameterAssert(backgroundColor != nil);
+    NSParameterAssert(textColor != nil);
+    NSParameterAssert(font != nil);
+    NSParameterAssert(diameter > 0);
+    
+    CGRect frame = CGRectMake(0.0f, 0.0f, diameter, diameter);
+    
+    NSDictionary *attributes = @{ NSFontAttributeName : font,
+                                  NSForegroundColorAttributeName : textColor };
+    
+    CGRect textFrame = [initials boundingRectWithSize:frame.size
+                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                           attributes:attributes
+                                              context:nil];
+    
+    CGPoint frameMidPoint = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
+    CGPoint textFrameMidPoint = CGPointMake(CGRectGetMidX(textFrame), CGRectGetMidY(textFrame));
+    
+    CGFloat dx = frameMidPoint.x - textFrameMidPoint.x;
+    CGFloat dy = frameMidPoint.y - textFrameMidPoint.y;
+    CGPoint drawPoint = CGPointMake(dx, dy);
+    UIImage *image = nil;
+    
+    UIGraphicsBeginImageContextWithOptions(frame.size, NO, [UIScreen mainScreen].scale);
+    {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetStrokeColorWithColor(context, borderColor.CGColor);
+        CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
+        CGContextFillRect(context, frame);
+        CGContextStrokeEllipseInRect(context, frame);
+        [initials drawAtPoint:drawPoint withAttributes:attributes];
+        
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        
+    }
+    UIGraphicsEndImageContext();
+    
+    return [JSQMessagesAvatarImageFactory jsq_circularImage:image withDiameter:diameter highlightedColor:nil];
+}
+
 
 @end

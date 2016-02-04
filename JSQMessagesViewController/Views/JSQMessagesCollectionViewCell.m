@@ -290,7 +290,6 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     if (CGSizeEqualToSize(avatarViewSize, self.avatarViewSize)) {
         return;
     }
-
     [self jsq_updateConstraint:self.avatarContainerViewWidthConstraint withConstant:avatarViewSize.width];
     [self jsq_updateConstraint:self.avatarContainerViewHeightConstraint withConstant:avatarViewSize.height];
 }
@@ -354,7 +353,6 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     if (constraint.constant == constant) {
         return;
     }
-
     constraint.constant = constant;
 }
 

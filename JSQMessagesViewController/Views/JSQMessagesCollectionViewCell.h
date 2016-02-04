@@ -203,4 +203,6 @@
  */
 + (void)registerMenuAction:(SEL)action;
 
+- (void)setAvatarViewSize:(CGSize)avatarViewSize;
+
 @end

@@ -465,7 +465,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     layoutAttributes.incomingAvatarViewSize = self.incomingAvatarViewSize;
     
-    layoutAttributes.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
+    layoutAttributes.outgoingAvatarViewSize = [self.collectionView.delegate collectionView:self.collectionView layout:self outgoingAvatarViewSizeAtIndexPath:indexPath];
+ //   layoutAttributes.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
     
     layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                 layout:self

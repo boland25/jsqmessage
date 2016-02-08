@@ -77,6 +77,13 @@
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
+ *  asks the Delegate to give the size of an avatar per index
+ *
+ *  @return CGFloat
+ */
+- (CGSize)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout outgoingAvatarViewSizeAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
  *  Notifies the delegate that the avatar image view at the specified indexPath did receive a tap event.
  *
  *  @param collectionView  The collection view object that is notifying the delegate of the tap event.
